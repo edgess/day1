@@ -2,32 +2,28 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.mav.day1.classMapper">
-    <select id="getClass" parameterType="int" resultMap="ClassResultMap">
-        select * from class c, teacher t where c.teacher_id=t.t_id and c.c_id=#{id}
-    </select>
-    <resultMap type="com.mav.day1.Classes" id="ClassResultMap">
-        <id property="id" column="c_id"/>
-        <result property="name" column="c_name"/>
-        <association property="teacher" javaType="com.mav.day1.Teacher">
-            <id property="id" column="t_id"/>
-            <result property="name" column="t_name"/>
-        </association>
-    </resultMap>
-<!--    
-    <select id="getClass2" parameterType="int" resultMap="ClassResultMap2">
-        select * from class where c_id=#{id}
-     </select>
-      使用resultMap映射实体类和字段之间的一一对应关系 
-     <resultMap type="com.mav.day1.Classes" id="ClassResultMap2">
-        <id property="id" column="c_id"/>
-        <result property="name" column="c_name"/>
-        <association property="teacher" column="teacher_id" select="getTeacher"/>
-     </resultMap>
-     
-     <select id="getTeacher" parameterType="int" resultType="com.mav.day1.Teacher">
-        SELECT t_id id, t_name name FROM teacher WHERE t_id=#{id}
-     </select>
-     -->
-
-    
+	<select id="getClass" parameterType="int" resultMap="ClassResultMap">
+		select * from class c, teacher t,student s where c.teacher_id=t.t_id and c.C_id=s.class_id and  c.c_id=#{id}
+	<!--select * from class c, teacher t where c.teacher_id=t.t_id and c.c_id=#{id}
+		  -->
+	</select>
+	<resultMap type="com.mav.day1.Classes" id="ClassResultMap">
+		<id property="id" column="c_id" />
+		<result property="name" column="c_name" />
+		<association property="teacher" javaType="com.mav.day1.Teacher">
+			<id property="id" column="t_id" />
+			<result property="name" column="t_name" />
+		</association>
+		<collection property="students" ofType="com.mav.day1.Student">
+			<id property="id" column="s_id" />
+			<result property="name" column="s_name" />
+		</collection>
+	</resultMap>
+	<!-- <select id="getClass2" parameterType="int" resultMap="ClassResultMap2"> 
+		select * from class where c_id=#{id} </select> 使用resultMap映射实体类和字段之间的一一对应关系 
+		<resultMap type="com.mav.day1.Classes" id="ClassResultMap2"> <id property="id" 
+		column="c_id"/> <result property="name" column="c_name"/> <association property="teacher" 
+		column="teacher_id" select="getTeacher"/> </resultMap> <select id="getTeacher" 
+		parameterType="int" resultType="com.mav.day1.Teacher"> SELECT t_id id, t_name 
+		name FROM teacher WHERE t_id=#{id} </select> -->
 </mapper>
