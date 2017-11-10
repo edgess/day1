@@ -16,9 +16,10 @@
 	<mappers>
         <!-- 注册userMapper.xml文件， 
         userMapper.xml位于me.gacl.mapping这个包下，所以resource写成me/gacl/mapping/userMapper.xml-->
-        <mapper resource="com/mav/day1/userMapper.xml"/>
+        <mapper resource="com/mav/day1/UserMapper.xml"/>
         <mapper resource="com/mav/day1/OrderMapper.xml"/>
         <mapper resource="com/mav/day1/classMapper.xml"/>
+        <mapper resource="com/mav/day1/ItMapper.xml"/>
     </mappers>
     
 </configuration>
